@@ -119,6 +119,18 @@ void kissat_update_scores (kissat *solver) {
       kissat_push_heap (solver, scores, idx);
 }
 
+void
+kissat_bump_variables (kissat * solver)
+{
+  START (bump);
+  assert (!solver->probing);
+  if (solver->stable)
+    bump_analyzed_variable_scores (solver);
+  else
+    move_analyzed_variables_to_front_of_queue (solver);
+  STOP (bump);
+}
+
 // CHB
 
 void kissat_bump_chb(kissat * solver, unsigned v, double multiplier) {

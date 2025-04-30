@@ -566,9 +566,9 @@ int kissat_analyze (kissat *solver, clause *conflict) {
       analyze_reason_side_literals (solver);
       kissat_learn_clause (solver);
 
-      // MAB bug?
-      // if (!solver->probing && (!solver->stable || solver->heuristic==0))
-      //   kissat_bump_variables (solver);
+      //MAB bug?
+      if (!solver->probing && (!solver->stable || solver->heuristic==0))
+        kissat_bump_variables (solver);
       if(!solver->probing && solver->stable && (solver->heuristic==1))
         kissat_update_conflicted_chb (solver);
       
